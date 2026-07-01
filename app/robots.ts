@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://kiran-gautham.vercel.app/sitemap.xml",
+    sitemap: "https://my-portfolio-kiran-gauthams-projects.vercel.app/sitemap.xml",
   };
 }

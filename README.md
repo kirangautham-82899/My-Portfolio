@@ -4,6 +4,10 @@ A premium animated developer portfolio for **Kiran Gautham**, built to showcase 
 
 The site is designed as a cinematic one-page portfolio with smooth scrolling, interactive motion, a lightweight Three.js hero scene, project case-study cards, GitHub project links, resume download, and SEO-ready metadata for production deployment.
 
+## Live Demo
+
+[my-portfolio-kiran-gauthams-projects.vercel.app](https://my-portfolio-kiran-gauthams-projects.vercel.app)
+
 ## Highlights
 
 - Cinematic responsive portfolio experience with animated sections and polished interaction details.
