@@ -1,6 +1,5 @@
 "use client";
 
-import type { Mesh, MeshBasicMaterial } from "three";
 import { useEffect, useRef } from "react";
 
 export function HeroCanvas() {
@@ -31,115 +30,98 @@ export function HeroCanvas() {
       renderer.setSize(mount.clientWidth, mount.clientHeight);
       mount.appendChild(renderer.domElement);
 
-      const laptop = new THREE.Group();
-      laptop.position.set(1.28, -0.2, 0);
-      laptop.rotation.set(-0.08, -0.14, 0.02);
-      laptop.scale.setScalar(0.9);
-      scene.add(laptop);
+      const planet = new THREE.Group();
+      planet.position.set(1.32, -0.12, 0);
+      planet.rotation.set(-0.18, -0.24, 0.08);
+      scene.add(planet);
 
-      const shellMaterial = new THREE.MeshStandardMaterial({
-        color: 0x07111f,
-        emissive: 0x0b2a42,
-        emissiveIntensity: 0.38,
-        metalness: 0.48,
-        roughness: 0.34,
-        transparent: true,
-        opacity: 0.66,
+      const surfaceGeometry = new THREE.IcosahedronGeometry(1.58, 4);
+      const surfaceMaterial = new THREE.MeshStandardMaterial({
+        color: 0x273a34,
+        emissive: 0x10281f,
+        emissiveIntensity: 0.26,
+        metalness: 0.08,
+        roughness: 0.86,
       });
-      const edgeMaterial = new THREE.LineBasicMaterial({ color: 0x8ee6ff, transparent: true, opacity: 0.38 });
-      const glowMaterial = new THREE.MeshBasicMaterial({
+      const surface = new THREE.Mesh(surfaceGeometry, surfaceMaterial);
+      planet.add(surface);
+
+      const wireMaterial = new THREE.LineBasicMaterial({ color: 0x8ee6ff, transparent: true, opacity: 0.22 });
+      const wireframe = new THREE.LineSegments(new THREE.EdgesGeometry(surfaceGeometry), wireMaterial);
+      planet.add(wireframe);
+
+      const atmosphereGeometry = new THREE.SphereGeometry(1.76, 48, 32);
+      const atmosphereMaterial = new THREE.MeshBasicMaterial({
         color: 0x8ee6ff,
         transparent: true,
-        opacity: 0.15,
+        opacity: 0.14,
+        side: THREE.BackSide,
+      });
+      const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+      planet.add(atmosphere);
+
+      const ringMaterial = new THREE.MeshBasicMaterial({
+        color: 0x5ef0b5,
+        transparent: true,
+        opacity: 0.28,
         side: THREE.DoubleSide,
       });
-      const keyMaterial = new THREE.MeshBasicMaterial({ color: 0x5ef0b5, transparent: true, opacity: 0.34 });
-      const trackpadMaterial = new THREE.MeshBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.18 });
+      const outerRingGeometry = new THREE.TorusGeometry(2.28, 0.011, 8, 160);
+      const outerRing = new THREE.Mesh(outerRingGeometry, ringMaterial);
+      outerRing.rotation.set(1.17, 0.16, -0.22);
+      planet.add(outerRing);
 
-      const baseGeometry = new THREE.BoxGeometry(3.45, 0.14, 1.58);
-      const base = new THREE.Mesh(baseGeometry, shellMaterial);
-      base.position.set(0, -1.05, 0.2);
-      base.rotation.x = 0.08;
-      laptop.add(base);
-
-      const baseEdges = new THREE.LineSegments(new THREE.EdgesGeometry(baseGeometry), edgeMaterial);
-      baseEdges.position.copy(base.position);
-      baseEdges.rotation.copy(base.rotation);
-      laptop.add(baseEdges);
-
-      const hingeGeometry = new THREE.CylinderGeometry(0.045, 0.045, 3.05, 18);
-      const hinge = new THREE.Mesh(hingeGeometry, shellMaterial);
-      hinge.position.set(0, -0.73, -0.52);
-      hinge.rotation.z = Math.PI / 2;
-      laptop.add(hinge);
-
-      const lid = new THREE.Group();
-      lid.position.set(0, -0.42, -0.55);
-      lid.rotation.x = -0.18;
-      laptop.add(lid);
-
-      const screenGeometry = new THREE.BoxGeometry(3.08, 1.9, 0.1);
-      const screen = new THREE.Mesh(screenGeometry, shellMaterial);
-      screen.position.y = 0.98;
-      lid.add(screen);
-
-      const screenEdges = new THREE.LineSegments(new THREE.EdgesGeometry(screenGeometry), edgeMaterial);
-      screenEdges.position.copy(screen.position);
-      lid.add(screenEdges);
-
-      const glowPlaneGeometry = new THREE.PlaneGeometry(2.72, 1.48);
-      const glowPlane = new THREE.Mesh(glowPlaneGeometry, glowMaterial);
-      glowPlane.position.set(0, 0.98, 0.062);
-      lid.add(glowPlane);
-
-      const codeLines: Mesh[] = [];
-      const codeMaterials: MeshBasicMaterial[] = [];
-      const lineWidths = [1.88, 1.12, 2.18, 1.52, 2.36, 0.92, 1.68, 2.04];
-      lineWidths.forEach((width, index) => {
-        const material = new THREE.MeshBasicMaterial({
-          color: index % 3 === 1 ? 0x5ef0b5 : 0x8ee6ff,
-          transparent: true,
-          opacity: 0.22,
-          side: THREE.DoubleSide,
-        });
-        const line = new THREE.Mesh(new THREE.PlaneGeometry(width, 0.035), material);
-        line.position.set(-1.08 + width * 0.5, 1.52 - index * 0.17, 0.071);
-        line.userData.phase = index * 0.7;
-        line.userData.baseOpacity = material.opacity;
-        codeLines.push(line);
-        codeMaterials.push(material);
-        lid.add(line);
+      const innerRingMaterial = new THREE.MeshBasicMaterial({
+        color: 0xa78bfa,
+        transparent: true,
+        opacity: 0.18,
+        side: THREE.DoubleSide,
       });
+      const innerRingGeometry = new THREE.TorusGeometry(1.96, 0.008, 8, 140);
+      const innerRing = new THREE.Mesh(innerRingGeometry, innerRingMaterial);
+      innerRing.rotation.copy(outerRing.rotation);
+      innerRing.rotation.z -= 0.08;
+      planet.add(innerRing);
 
-      const scanMaterial = new THREE.MeshBasicMaterial({ color: 0x5ef0b5, transparent: true, opacity: 0.24, side: THREE.DoubleSide });
-      const scanLine = new THREE.Mesh(new THREE.PlaneGeometry(2.58, 0.018), scanMaterial);
-      scanLine.position.set(0, 1.5, 0.074);
-      lid.add(scanLine);
+      const crackMaterial = new THREE.LineBasicMaterial({ color: 0xefd6a1, transparent: true, opacity: 0.42 });
+      const crackGeometry = new THREE.BufferGeometry();
+      const crackPoints = [
+        -0.52, 1.08, 1.02, -0.3, 0.9, 1.2, -0.15, 0.68, 1.34, 0.1, 0.52, 1.38,
+        0.72, 0.42, 1.26, 0.54, 0.22, 1.42, 0.76, 0.04, 1.38, 0.62, -0.18, 1.42,
+        -0.92, -0.18, 1.2, -0.64, -0.3, 1.32, -0.44, -0.56, 1.24, -0.16, -0.66, 1.22,
+        0.18, -0.88, 1.1, 0.44, -1.02, 0.92, 0.68, -0.92, 0.86, 0.82, -0.68, 1.0,
+        -1.28, 0.34, 0.74, -1.08, 0.16, 0.98, -1.22, -0.04, 0.86, -1.02, -0.2, 1.02,
+      ];
+      crackGeometry.setAttribute("position", new THREE.Float32BufferAttribute(crackPoints, 3));
+      const cracks = new THREE.LineSegments(crackGeometry, crackMaterial);
+      planet.add(cracks);
 
-      const cursorMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.56 });
-      const cursor = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.2, 0.012), cursorMaterial);
-      cursor.position.set(0.95, 0.55, 0.078);
-      lid.add(cursor);
+      const capMaterial = new THREE.MeshBasicMaterial({ color: 0xd6f8ff, transparent: true, opacity: 0.38, side: THREE.DoubleSide });
+      const capGeometry = new THREE.CircleGeometry(0.46, 28);
+      const northCap = new THREE.Mesh(capGeometry, capMaterial);
+      northCap.position.set(0.08, 1.5, 0.44);
+      northCap.rotation.set(1.32, -0.05, 0.18);
+      planet.add(northCap);
 
-      const keyGeometry = new THREE.BoxGeometry(0.17, 0.028, 0.11);
-      const keys: Mesh[] = [];
-      for (let row = 0; row < 4; row++) {
-        const count = row === 3 ? 8 : 11;
-        const start = -((count - 1) * 0.22) / 2;
-        for (let col = 0; col < count; col++) {
-          const key = new THREE.Mesh(keyGeometry, keyMaterial);
-          key.position.set(start + col * 0.22 + (row === 1 ? 0.05 : 0), -0.91, -0.22 + row * 0.18);
-          key.rotation.x = 0.08;
-          key.userData.phase = row * 0.8 + col * 0.2;
-          keys.push(key);
-          laptop.add(key);
-        }
-      }
+      const southCap = new THREE.Mesh(capGeometry, capMaterial);
+      southCap.position.set(-0.18, -1.43, -0.32);
+      southCap.rotation.set(-1.12, 0.25, -0.12);
+      southCap.scale.setScalar(0.72);
+      planet.add(southCap);
 
-      const trackpad = new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.026, 0.36), trackpadMaterial);
-      trackpad.position.set(0, -0.9, 0.66);
-      trackpad.rotation.x = 0.08;
-      laptop.add(trackpad);
+      const moonGeometry = new THREE.IcosahedronGeometry(0.18, 2);
+      const moonMaterial = new THREE.MeshStandardMaterial({
+        color: 0xefd6a1,
+        emissive: 0x2d2114,
+        emissiveIntensity: 0.18,
+        roughness: 0.78,
+      });
+      const moonPivot = new THREE.Group();
+      const moon = new THREE.Mesh(moonGeometry, moonMaterial);
+      moon.position.set(2.68, 0.16, 0);
+      moonPivot.rotation.set(0.45, 0.2, -0.14);
+      moonPivot.add(moon);
+      planet.add(moonPivot);
 
       const positions = new Float32Array(320 * 3);
       for (let i = 0; i < positions.length; i += 3) {
@@ -179,21 +161,20 @@ export function HeroCanvas() {
       const animate = () => {
         frame = requestAnimationFrame(animate);
         const time = performance.now() * 0.001;
-        laptop.rotation.y = -0.14 + Math.sin(time * 0.28) * 0.035;
-        laptop.rotation.x = -0.08 + Math.sin(time * 0.22) * 0.018;
-        glowMaterial.opacity = 0.1 + Math.sin(time * 1.1) * 0.035;
-        scanLine.position.y = 1.53 - ((time * 0.32) % 1.42);
-        scanMaterial.opacity = 0.14 + Math.sin(time * 1.7) * 0.06;
-        cursorMaterial.opacity = Math.sin(time * 4.8) > 0 ? 0.54 : 0.18;
-
-        codeLines.forEach((line) => {
-          const material = line.material as MeshBasicMaterial;
-          material.opacity = line.userData.baseOpacity + Math.sin(time * 1.2 + line.userData.phase) * 0.08;
-        });
-        keys.forEach((key) => {
-          const pulse = 1 + Math.max(0, Math.sin(time * 1.4 + key.userData.phase)) * 0.08;
-          key.scale.y = pulse;
-        });
+        planet.rotation.y = -0.24 + time * 0.08;
+        planet.rotation.x = -0.18 + Math.sin(time * 0.24) * 0.035;
+        surface.rotation.y = time * 0.075;
+        wireframe.rotation.y = surface.rotation.y;
+        cracks.rotation.y = surface.rotation.y;
+        northCap.rotation.z = time * 0.05;
+        southCap.rotation.z = -time * 0.04;
+        atmosphereMaterial.opacity = 0.1 + Math.sin(time * 1.05) * 0.035;
+        ringMaterial.opacity = 0.22 + Math.sin(time * 0.9) * 0.05;
+        innerRingMaterial.opacity = 0.14 + Math.sin(time * 0.7 + 1.2) * 0.04;
+        outerRing.rotation.z = -0.22 + Math.sin(time * 0.18) * 0.04;
+        innerRing.rotation.z = outerRing.rotation.z - 0.08;
+        moonPivot.rotation.y = time * 0.22;
+        moon.rotation.y = time * 0.32;
         particles.rotation.y = time * 0.018;
         particles.rotation.x = Math.sin(time * 0.16) * 0.025;
         renderer.render(scene, camera);
@@ -205,25 +186,22 @@ export function HeroCanvas() {
       cleanup = () => {
         cancelAnimationFrame(frame);
         window.removeEventListener("resize", resize);
-        baseGeometry.dispose();
-        screenGeometry.dispose();
-        hingeGeometry.dispose();
-        glowPlaneGeometry.dispose();
-        keyGeometry.dispose();
-        trackpad.geometry.dispose();
-        codeLines.forEach((line) => line.geometry.dispose());
-        shellMaterial.dispose();
-        edgeMaterial.dispose();
-        glowMaterial.dispose();
-        keyMaterial.dispose();
-        trackpadMaterial.dispose();
-        codeMaterials.forEach((material) => material.dispose());
-        scanLine.geometry.dispose();
-        scanMaterial.dispose();
-        cursor.geometry.dispose();
-        cursorMaterial.dispose();
-        baseEdges.geometry.dispose();
-        screenEdges.geometry.dispose();
+        surfaceGeometry.dispose();
+        surfaceMaterial.dispose();
+        wireframe.geometry.dispose();
+        wireMaterial.dispose();
+        atmosphereGeometry.dispose();
+        atmosphereMaterial.dispose();
+        outerRingGeometry.dispose();
+        ringMaterial.dispose();
+        innerRingGeometry.dispose();
+        innerRingMaterial.dispose();
+        crackGeometry.dispose();
+        crackMaterial.dispose();
+        capGeometry.dispose();
+        capMaterial.dispose();
+        moonGeometry.dispose();
+        moonMaterial.dispose();
         particleGeometry.dispose();
         particleMaterial.dispose();
         renderer.dispose();
