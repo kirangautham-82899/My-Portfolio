@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://my-portfolio-kiran-gauthams-projects.vercel.app"),
+  metadataBase: new URL("https://kiran-portfolio-gilt.vercel.app"),
   title: {
     default: "Kiran Gautham | Full Stack, AI/ML & Cybersecurity Developer",
     template: "%s | Kiran Gautham",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: "Kiran Gautham | Full Stack, AI/ML & Cybersecurity Developer",
     description:
       "Award-grade animated portfolio showcasing full-stack engineering, real-time systems, AI/ML, cybersecurity projects, research, achievements, and leadership.",
-    url: "https://my-portfolio-kiran-gauthams-projects.vercel.app",
+    url: "https://kiran-portfolio-gilt.vercel.app",
     siteName: "Kiran Gautham Portfolio",
     images: [
       {

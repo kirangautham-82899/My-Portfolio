@@ -6,7 +6,7 @@ The site is designed as a cinematic one-page portfolio with smooth scrolling, in
 
 ## Live Demo
 
-[my-portfolio-kiran-gauthams-projects.vercel.app](https://my-portfolio-kiran-gauthams-projects.vercel.app)
+[kiran-portfolio-gilt.vercel.app](https://kiran-portfolio-gilt.vercel.app)
 
 ## Highlights
 
