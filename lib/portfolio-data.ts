@@ -72,10 +72,22 @@ export const portfolioData = {
   ],
   experience: [
     {
-      role: "Software Engineer Intern",
-      company: "Sustains Energy",
+      role: "Software Engineer",
+      company: "Sustains.ai Financial Solutions LLP",
       location: "Bangalore",
-      period: "Oct 2025 - Present",
+      period: "Jul 2026 - Present",
+      icon: "BriefcaseBusiness",
+      bullets: [
+        "Joined full-time following a successful internship, as a core member of the engineering team at Sustains.ai Financial Solutions LLP.",
+        "Focused on software development and system architecture, collaborating closely with product management to deliver high-quality financial solutions.",
+        "Contributing to production-grade systems with ownership across the full development lifecycle.",
+      ],
+    },
+    {
+      role: "Software Engineer Intern",
+      company: "Sustains.ai Financial Solutions LLP",
+      location: "Bangalore",
+      period: "Oct 2025 - Jun 2026",
       icon: "BriefcaseBusiness",
       bullets: [
         "Developed and maintained full-stack features for production-grade energy analytics software using React.js and Node.js/Express.js.",

@@ -211,11 +211,11 @@ function Hero({ data }: { data: PortfolioData }) {
     }
 
     if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(() => setShowCanvas(true), { timeout: 1600 });
+      const idleId = window.requestIdleCallback(() => setShowCanvas(true), { timeout: 600 });
       return () => window.cancelIdleCallback(idleId);
     }
 
-    const timer = globalThis.setTimeout(() => setShowCanvas(true), 600);
+    const timer = globalThis.setTimeout(() => setShowCanvas(true), 300);
     return () => globalThis.clearTimeout(timer);
   }, []);
 
@@ -234,7 +234,7 @@ function Hero({ data }: { data: PortfolioData }) {
           <h1 className="max-w-5xl text-5xl font-semibold tracking-tight sm:text-7xl lg:text-8xl">
             <span className="block">Kiran Gautham </span>
             <span className="glow-text block pt-2 text-4xl sm:text-6xl lg:text-7xl">
-              <ScrambleText text="builds intelligent systems." />
+              builds intelligent systems.
             </span>
           </h1>
           <p className="mt-7 max-w-3xl text-lg leading-8 text-[var(--muted)] sm:text-xl">{data.person.summary}</p>
@@ -242,7 +242,7 @@ function Hero({ data }: { data: PortfolioData }) {
             <MagneticButton href="#projects" variant="default" size="lg">
               View case studies <ArrowUpRight className="h-4 w-4" aria-hidden />
             </MagneticButton>
-            <MagneticButton href={`mailto:${data.person.email}`} variant="secondary" size="lg">
+            <MagneticButton href="#contact" variant="secondary" size="lg">
               <Mail className="h-4 w-4" aria-hidden /> Start a conversation
             </MagneticButton>
           </div>
@@ -548,13 +548,36 @@ function GithubActivity({ data }: { data: PortfolioData }) {
   );
 }
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mwvdyvoq";
+
 function Contact({ data }: { data: PortfolioData }) {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSent(true);
-    window.setTimeout(() => setSent(false), 4200);
+    setSubmitting(true);
+    setError(false);
+    const form = event.currentTarget;
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(form),
+      });
+      if (res.ok) {
+        setSent(true);
+        form.reset();
+        window.setTimeout(() => setSent(false), 5000);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -590,12 +613,17 @@ function Contact({ data }: { data: PortfolioData }) {
             <textarea required name="message" rows={6} className="resize-none rounded-[var(--radius)] border border-[var(--line)] bg-[color-mix(in_oklab,var(--background)_72%,transparent)] px-4 py-3 text-[var(--foreground)] outline-none transition focus:border-[var(--primary)]" />
           </label>
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            <Button type="submit" variant="default">
-              <Send className="h-4 w-4" aria-hidden /> Send message
+            <Button type="submit" variant="default" disabled={submitting}>
+              <Send className="h-4 w-4" aria-hidden /> {submitting ? "Sending…" : "Send message"}
             </Button>
             {sent && (
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 text-sm text-[var(--accent)]">
-                <CheckCircle2 className="h-4 w-4" aria-hidden /> Message staged. Email link is ready for delivery.
+                <CheckCircle2 className="h-4 w-4" aria-hidden /> Message sent — I'll get back to you soon!
+              </motion.p>
+            )}
+            {error && (
+              <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-sm text-red-400">
+                Something went wrong. Try emailing directly at kirangautham82899@gmail.com
               </motion.p>
             )}
           </div>
