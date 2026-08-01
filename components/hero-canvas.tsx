@@ -1,5 +1,6 @@
 "use client";
 
+import type { Vector3 } from "three";
 import { useEffect, useRef } from "react";
 
 export function HeroCanvas() {
@@ -30,7 +31,7 @@ export function HeroCanvas() {
 
       // Neural network nodes arranged in layers
       const layers = [3, 5, 5, 3];
-      const nodePositions: THREE.Vector3[] = [];
+      const nodePositions: Vector3[] = [];
       const layerSpacing = 1.5;
       const nodeSpacing = 1.1;
 

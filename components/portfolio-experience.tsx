@@ -39,7 +39,6 @@ import {
 import { type CSSProperties, type FormEvent, type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/magnetic-button";
-import { ScrambleText } from "@/components/scramble-text";
 import type { PortfolioData } from "@/lib/portfolio-data";
 import { cn } from "@/lib/utils";
 
@@ -597,15 +596,22 @@ function Contact({ data }: { data: PortfolioData }) {
             ))}
           </div>
         </div>
-        <form onSubmit={submit} className="reveal glass rounded-[var(--radius)] p-6">
+        <form
+          action={FORMSPREE_ENDPOINT}
+          method="POST"
+          onSubmit={submit}
+          className="reveal glass rounded-[var(--radius)] p-6"
+        >
+          <input type="hidden" name="_subject" value="New portfolio contact form message" />
+          <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="grid gap-2 text-sm text-[var(--muted)]">
               Name
-              <input required name="name" className="rounded-[var(--radius)] border border-[var(--line)] bg-[color-mix(in_oklab,var(--background)_72%,transparent)] px-4 py-3 text-[var(--foreground)] outline-none transition focus:border-[var(--primary)]" />
+              <input required name="name" autoComplete="name" className="rounded-[var(--radius)] border border-[var(--line)] bg-[color-mix(in_oklab,var(--background)_72%,transparent)] px-4 py-3 text-[var(--foreground)] outline-none transition focus:border-[var(--primary)]" />
             </label>
             <label className="grid gap-2 text-sm text-[var(--muted)]">
               Email
-              <input required type="email" name="email" className="rounded-[var(--radius)] border border-[var(--line)] bg-[color-mix(in_oklab,var(--background)_72%,transparent)] px-4 py-3 text-[var(--foreground)] outline-none transition focus:border-[var(--primary)]" />
+              <input required type="email" name="email" autoComplete="email" className="rounded-[var(--radius)] border border-[var(--line)] bg-[color-mix(in_oklab,var(--background)_72%,transparent)] px-4 py-3 text-[var(--foreground)] outline-none transition focus:border-[var(--primary)]" />
             </label>
           </div>
           <label className="mt-4 grid gap-2 text-sm text-[var(--muted)]">
@@ -618,7 +624,7 @@ function Contact({ data }: { data: PortfolioData }) {
             </Button>
             {sent && (
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 text-sm text-[var(--accent)]">
-                <CheckCircle2 className="h-4 w-4" aria-hidden /> Message sent — I'll get back to you soon!
+                <CheckCircle2 className="h-4 w-4" aria-hidden /> Message sent — I&apos;ll get back to you soon!
               </motion.p>
             )}
             {error && (
