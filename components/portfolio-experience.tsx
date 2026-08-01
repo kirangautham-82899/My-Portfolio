@@ -221,7 +221,7 @@ function Hero({ data }: { data: PortfolioData }) {
   return (
     <section id="home" className="relative min-h-screen overflow-hidden px-5 pb-24 pt-36 sm:px-8 lg:pt-44">
       <div className="grid-bg absolute inset-0 opacity-55" aria-hidden />
-      <div className="absolute inset-0 z-0 opacity-90" aria-hidden>
+      <div className="hero-visual absolute inset-0 z-0 opacity-90" aria-hidden>
         {showCanvas ? (
           <HeroCanvas />
         ) : (
@@ -263,16 +263,16 @@ function Hero({ data }: { data: PortfolioData }) {
         >
           <div className="absolute left-8 top-10 h-24 w-72 rounded-full bg-[color-mix(in_oklab,var(--primary)_24%,transparent)] blur-3xl" />
           <div className="absolute bottom-24 right-10 h-28 w-72 rounded-full bg-[color-mix(in_oklab,var(--accent)_18%,transparent)] blur-3xl" />
-          <TiltCard className="absolute right-6 top-12 w-80 p-5">
+          <TiltCard className="hero-signal-card absolute right-6 top-12 w-80 p-5">
             <p className="text-sm uppercase tracking-[0.24em] text-[var(--muted)]">Engineering signal</p>
             <p className="mt-4 text-3xl font-semibold">Full stack + AI + security</p>
-            <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
+            <div className="mt-5 h-2 overflow-hidden rounded-full bg-[color-mix(in_oklab,var(--foreground)_10%,transparent)]">
               <motion.div className="h-full rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--accent)]" initial={{ width: 0 }} animate={{ width: "92%" }} transition={{ delay: 0.8, duration: 1.3 }} />
             </div>
           </TiltCard>
-          <TiltCard className="absolute bottom-14 left-0 w-96 p-5">
+          <TiltCard className="hero-signal-card absolute bottom-14 left-0 w-96 p-5">
             <p className="text-sm text-[var(--muted)]">Current trajectory</p>
-            <p className="mt-2 text-xl font-semibold">Production internship, research publication, and multi-domain project portfolio.</p>
+            <p className="mt-2 text-xl font-semibold">Software Engineer at Sustains.ai, M.Tech Data Science student, and research-backed builder.</p>
           </TiltCard>
         </motion.div>
       </div>
@@ -298,9 +298,18 @@ function About({ data }: { data: PortfolioData }) {
       <div className="reveal mt-5 grid gap-5 lg:grid-cols-[0.7fr_1.3fr]">
         <div className="glass rounded-[var(--radius)] p-6">
           <p className="text-sm uppercase tracking-[0.24em] text-[var(--primary)]">Education</p>
-          <h3 className="mt-3 text-2xl font-semibold">{data.education.degree}</h3>
-          <p className="mt-2 text-[var(--muted)]">{data.education.school}</p>
-          <p className="mt-4 font-semibold text-[var(--accent)]">{data.education.score}</p>
+          <div className="mt-4 grid gap-5">
+            {data.education.entries.map((item) => (
+              <div key={`${item.degree}-${item.school}`} className="border-l border-[var(--line-strong)] pl-4">
+                <h3 className="text-xl font-semibold">{item.degree}</h3>
+                <p className="mt-2 text-[var(--muted)]">{item.school}</p>
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
+                  <span className="rounded-full border border-[var(--line)] px-3 py-1 text-[var(--primary)]">{item.period}</span>
+                  <span className="text-[var(--accent)]">{item.score}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="glass rounded-[var(--radius)] p-6">
           <p className="text-sm uppercase tracking-[0.24em] text-[var(--primary)]">Professional summary</p>

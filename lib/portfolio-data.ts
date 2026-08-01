@@ -78,7 +78,7 @@ export const portfolioData = {
       period: "Jul 2026 - Present",
       icon: "BriefcaseBusiness",
       bullets: [
-        "Joined full-time following a successful internship, as a core member of the engineering team at Sustains.ai Financial Solutions LLP.",
+        "Accepted a full-time Software Engineer offer in July 2026 after completing the internship with Sustains.ai Financial Solutions LLP in June 2026.",
         "Focused on software development and system architecture, collaborating closely with product management to deliver high-quality financial solutions.",
         "Contributing to production-grade systems with ownership across the full development lifecycle.",
       ],
@@ -206,10 +206,20 @@ export const portfolioData = {
     },
   ],
   education: {
-    degree: "B.Tech - Computer Science Engineering",
-    school: "Ahalia School of Engineering and Technology, Palakkad",
-    period: "May 2026",
-    score: "CGPA 8.18 / 10",
+    entries: [
+      {
+        degree: "M.Tech - Data Science",
+        school: "Amrita Vishwa Vidyapeetham, Coimbatore",
+        period: "2026 - Present",
+        score: "Postgraduate study in data science",
+      },
+      {
+        degree: "B.Tech - Computer Science Engineering",
+        school: "Ahalia School of Engineering and Technology, Palakkad",
+        period: "May 2026",
+        score: "CGPA 8.18 / 10",
+      },
+    ],
   },
   contactLinks: [
     { label: "Email", href: "mailto:kirangautham82899@gmail.com", icon: "Mail" },

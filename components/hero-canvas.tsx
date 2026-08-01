@@ -16,6 +16,12 @@ export function HeroCanvas() {
       if (disposed || !mountRef.current) return;
 
       const mount = mountRef.current;
+      const styles = getComputedStyle(document.documentElement);
+      const primary = styles.getPropertyValue("--primary").trim() || "#8ee6ff";
+      const secondary = styles.getPropertyValue("--secondary").trim() || "#a78bfa";
+      const accent = styles.getPropertyValue("--accent").trim() || "#5ef0b5";
+      const foreground = styles.getPropertyValue("--foreground").trim() || "#ffffff";
+      const isLight = styles.colorScheme === "light";
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(44, mount.clientWidth / mount.clientHeight, 0.1, 120);
       camera.position.z = 9;
@@ -35,7 +41,7 @@ export function HeroCanvas() {
       const layerSpacing = 1.5;
       const nodeSpacing = 1.1;
 
-      const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0x8ee6ff, transparent: true, opacity: 0.9 });
+      const nodeMaterial = new THREE.MeshBasicMaterial({ color: primary, transparent: true, opacity: isLight ? 0.72 : 0.9 });
       const nodeGeometry = new THREE.SphereGeometry(0.07, 10, 8);
 
       layers.forEach((count, li) => {
@@ -51,7 +57,7 @@ export function HeroCanvas() {
       });
 
       // Edges connecting adjacent layers
-      const edgeMaterial = new THREE.LineBasicMaterial({ color: 0x5ef0b5, transparent: true, opacity: 0.18 });
+      const edgeMaterial = new THREE.LineBasicMaterial({ color: accent, transparent: true, opacity: isLight ? 0.14 : 0.18 });
       let nodeOffset = 0;
       for (let li = 0; li < layers.length - 1; li++) {
         const aCount = layers[li];
@@ -71,13 +77,13 @@ export function HeroCanvas() {
       // Outer bounding box wireframe (cube) — data structure feel
       const boxGeo = new THREE.BoxGeometry(5.8, 4.2, 1.2);
       const boxEdges = new THREE.EdgesGeometry(boxGeo);
-      const boxMat = new THREE.LineBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.12 });
+      const boxMat = new THREE.LineBasicMaterial({ color: secondary, transparent: true, opacity: isLight ? 0.1 : 0.12 });
       const box = new THREE.LineSegments(boxEdges, boxMat);
       group.add(box);
 
       // Orbiting accent ring (represents data flow loop)
       const ringGeo = new THREE.TorusGeometry(2.6, 0.009, 6, 120);
-      const ringMat = new THREE.MeshBasicMaterial({ color: 0x8ee6ff, transparent: true, opacity: 0.22, side: THREE.DoubleSide });
+      const ringMat = new THREE.MeshBasicMaterial({ color: primary, transparent: true, opacity: isLight ? 0.16 : 0.22, side: THREE.DoubleSide });
       const ring = new THREE.Mesh(ringGeo, ringMat);
       ring.rotation.set(1.2, 0.1, -0.2);
       group.add(ring);
@@ -92,11 +98,11 @@ export function HeroCanvas() {
       }
       const particleGeo = new THREE.BufferGeometry();
       particleGeo.setAttribute("position", new THREE.BufferAttribute(pPositions, 3));
-      const particleMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.018, transparent: true, opacity: 0.38 });
+      const particleMat = new THREE.PointsMaterial({ color: foreground, size: 0.018, transparent: true, opacity: isLight ? 0.16 : 0.38 });
       scene.add(new THREE.Points(particleGeo, particleMat));
 
       scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-      const light = new THREE.PointLight(0x8ee6ff, 1.8);
+      const light = new THREE.PointLight(primary, isLight ? 1.1 : 1.8);
       light.position.set(4, 3, 5);
       scene.add(light);
 
@@ -113,7 +119,7 @@ export function HeroCanvas() {
         group.rotation.y = t * 0.12;
         group.rotation.x = Math.sin(t * 0.2) * 0.08;
         ring.rotation.z = -0.2 + Math.sin(t * 0.5) * 0.04;
-        ringMat.opacity = 0.18 + Math.sin(t * 0.8) * 0.05;
+        ringMat.opacity = (isLight ? 0.13 : 0.18) + Math.sin(t * 0.8) * (isLight ? 0.025 : 0.05);
         renderer.render(scene, camera);
       };
 
