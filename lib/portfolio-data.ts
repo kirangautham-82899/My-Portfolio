@@ -173,13 +173,13 @@ export const portfolioData = {
     { icon: "Radar", title: "Adobe India Hackathon", text: "Competitive hackathon recognition" },
   ],
   certifications: [
-    "React - HackerRank",
-    "Java - HackerRank",
-    "Web Development - NSDC, Internshala",
-    "Python - NSDC, Internshala",
-    "Software Testing - NPTEL",
-    "Orchestrate Excellence - HackerRank",
-    "Front-End Developer Capstone - Meta (Coursera)",
+    { icon: "Code2",       title: "React",                        issuer: "HackerRank",        text: "Certified in building component-based UIs with React.js" },
+    { icon: "Coffee",      title: "Java",                         issuer: "HackerRank",        text: "Core Java proficiency covering OOP, data structures, and algorithms" },
+    { icon: "Globe",       title: "Web Development",              issuer: "NSDC · Internshala", text: "Full-stack web development fundamentals and modern practices" },
+    { icon: "Terminal",    title: "Python",                       issuer: "NSDC · Internshala", text: "Python programming covering scripting, data handling, and automation" },
+    { icon: "FlaskConical", title: "Software Testing",            issuer: "NPTEL",             text: "Software quality assurance, testing strategies, and test automation" },
+    { icon: "Star",        title: "Orchestrate Excellence",       issuer: "HackerRank",        text: "Advanced problem-solving and engineering excellence recognition" },
+    { icon: "Layout",      title: "Front-End Developer Capstone", issuer: "Meta · Coursera",   text: "Meta-certified capstone covering React, UI design, and front-end best practices" },
   ],
   leadership: [
     {

@@ -457,11 +457,16 @@ function ResearchAndAchievements({ data }: { data: PortfolioData }) {
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <div className="reveal glass rounded-[var(--radius)] p-6">
           <h3 className="text-xl font-semibold">Certifications</h3>
-          <div className="mt-5 flex flex-wrap gap-2">
+          <div className="mt-5 space-y-4">
             {data.certifications.map((cert) => (
-              <span key={cert} className="rounded-full border border-[var(--line)] px-3 py-2 text-sm text-[var(--muted)]">
-                {cert}
-              </span>
+              <div key={cert.title} className="flex gap-4">
+                <IconGlyph name={cert.icon} className="mt-1 h-5 w-5 shrink-0 text-[var(--primary)]" />
+                <div>
+                  <p className="font-semibold">{cert.title}</p>
+                  <p className="text-sm text-[var(--primary)]">{cert.issuer}</p>
+                  <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{cert.text}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
