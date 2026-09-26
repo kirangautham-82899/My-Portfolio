@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://kiran-portfolio-gilt.vercel.app/sitemap.xml",
+    sitemap: "https://my-portfolio-alpha-ochre-20.vercel.app/sitemap.xml",
   };
 }

@@ -2,41 +2,51 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
+const SITE_URL = "https://my-portfolio-alpha-ochre-20.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kiran-portfolio-gilt.vercel.app"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Kiran Gautham | Full Stack, AI/ML & Cybersecurity Developer",
+    default: "Kiran Gautham | Software Engineer — Full Stack, AI/ML & Cybersecurity",
     template: "%s | Kiran Gautham",
   },
   description:
-    "Premium developer portfolio for Kiran Gautham, a full-stack engineer focused on AI/ML, cybersecurity, real-time systems, React, Next.js, Node.js, Python, FastAPI, and scalable product engineering.",
+    "Kiran Gautham — Software Engineer at Sustains.ai. Full-stack developer specialising in React, Next.js, Node.js, Python, AI/ML, and cybersecurity. B.Tech CSE graduate, published researcher, 15+ hackathon wins.",
   keywords: [
     "Kiran Gautham",
+    "Kiran Gautham portfolio",
+    "Kiran Gautham developer",
+    "Kiran Gautham software engineer",
     "Full Stack Developer",
-    "AI ML Developer",
-    "Cybersecurity",
-    "React",
-    "Next.js",
-    "Node.js",
-    "Python",
+    "Software Engineer Sustains.ai",
+    "AI ML Developer India",
+    "Cybersecurity Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Node.js Developer",
+    "Python Developer",
     "FastAPI",
-    "Real-Time Systems",
-    "Portfolio",
+    "Palakkad developer",
+    "Kerala software engineer",
+    "Amrita Vishwa Vidyapeetham",
+    "Ahalia School of Engineering",
+    "portfolio",
   ],
   authors: [{ name: "Kiran Gautham", url: "https://github.com/kirangautham-82899" }],
   creator: "Kiran Gautham",
+  publisher: "Kiran Gautham",
   openGraph: {
-    title: "Kiran Gautham | Full Stack, AI/ML & Cybersecurity Developer",
+    title: "Kiran Gautham | Software Engineer — Full Stack, AI/ML & Cybersecurity",
     description:
-      "Award-grade animated portfolio showcasing full-stack engineering, real-time systems, AI/ML, cybersecurity projects, research, achievements, and leadership.",
-    url: "https://kiran-portfolio-gilt.vercel.app",
-    siteName: "Kiran Gautham Portfolio",
+      "Kiran Gautham — Software Engineer at Sustains.ai. Full-stack developer, AI/ML researcher, cybersecurity builder. 15+ hackathon wins, published research, B.Tech CSE 2026.",
+    url: SITE_URL,
+    siteName: "Kiran Gautham",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Kiran Gautham portfolio preview",
+        alt: "Kiran Gautham — Software Engineer portfolio",
       },
     ],
     locale: "en_IN",
@@ -44,17 +54,24 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kiran Gautham | Full Stack, AI/ML & Cybersecurity Developer",
+    title: "Kiran Gautham | Software Engineer — Full Stack, AI/ML & Cybersecurity",
     description:
-      "Full-stack, AI/ML, cybersecurity, and real-time systems portfolio with cinematic interactive engineering case studies.",
+      "Kiran Gautham — Software Engineer at Sustains.ai. Full-stack, AI/ML, cybersecurity, real-time systems.",
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "/",
+    canonical: SITE_URL,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
   },
 };
 
@@ -65,6 +82,56 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Kiran Gautham",
+  url: "https://my-portfolio-alpha-ochre-20.vercel.app",
+  image: "https://my-portfolio-alpha-ochre-20.vercel.app/og-image.png",
+  jobTitle: "Software Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Sustains.ai Financial Solutions LLP",
+  },
+  alumniOf: [
+    {
+      "@type": "CollegeOrUniversity",
+      name: "Ahalia School of Engineering and Technology",
+      address: "Palakkad, Kerala, India",
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "Amrita Vishwa Vidyapeetham",
+      address: "Coimbatore, Tamil Nadu, India",
+    },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Palakkad",
+    addressRegion: "Kerala",
+    addressCountry: "IN",
+  },
+  email: "kirangautham82899@gmail.com",
+  sameAs: [
+    "https://github.com/kirangautham-82899",
+    "https://www.linkedin.com/in/kiran-gautham-b16319358/",
+  ],
+  knowsAbout: [
+    "Full Stack Development",
+    "React.js",
+    "Next.js",
+    "Node.js",
+    "Python",
+    "TypeScript",
+    "AI/ML",
+    "Cybersecurity",
+    "Real-Time Systems",
+    "FastAPI",
+  ],
+  description:
+    "Software Engineer at Sustains.ai. Full-stack developer specialising in React, Next.js, Node.js, Python, AI/ML, and cybersecurity. B.Tech CSE graduate, published researcher, 15+ hackathon wins.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -72,6 +139,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
