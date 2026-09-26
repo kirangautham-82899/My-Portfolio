@@ -285,7 +285,7 @@ function Hero({ data }: { data: PortfolioData }) {
 
 function About({ data }: { data: PortfolioData }) {
   return (
-    <Section id="about" eyebrow="About" title="A product-minded engineer with research depth and security instincts.">
+    <Section id="about" eyebrow="About" title="Kiran Gautham — Software Engineer, AI/ML Researcher & Cybersecurity Builder">
       <div className="grid gap-4 lg:grid-cols-4">
         {data.focusAreas.map((area) => (
           <TiltCard key={area.title} className="reveal p-6">
@@ -322,7 +322,7 @@ function About({ data }: { data: PortfolioData }) {
 
 function Skills({ data }: { data: PortfolioData }) {
   return (
-    <Section id="skills" eyebrow="Skills" title="A modern stack for ambitious web, AI, and real-time products.">
+    <Section id="skills" eyebrow="Skills" title="Technical Skills — React, Next.js, Node.js, Python, AI/ML, Cybersecurity">
       <div className="grid gap-4 lg:grid-cols-2">
         {data.skills.map((skill, index) => (
           <div key={skill.name} className="reveal glass rounded-[var(--radius)] p-5">
@@ -351,7 +351,7 @@ function Skills({ data }: { data: PortfolioData }) {
 
 function Experience({ data }: { data: PortfolioData }) {
   return (
-    <Section id="experience" eyebrow="Experience" title="Built around shipping, testing, and production collaboration.">
+    <Section id="experience" eyebrow="Experience" title="Work Experience — Software Engineer at Sustains.ai, Bangalore">
       <div className="relative">
         <div className="absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-[var(--primary)] via-[var(--secondary)] to-transparent md:block" aria-hidden />
         {data.experience.map((item) => (
@@ -385,7 +385,7 @@ function Experience({ data }: { data: PortfolioData }) {
 
 function Projects({ data }: { data: PortfolioData }) {
   return (
-    <Section id="projects" eyebrow="Featured Projects" title="Animated case studies across AI, security, computer vision, and live systems.">
+    <Section id="projects" eyebrow="Featured Projects" title="Projects — AI/ML, Cybersecurity, Computer Vision & Full Stack Web Apps">
       <div className="grid gap-5 lg:grid-cols-2">
         {data.projects.map((project, index) => (
           <TiltCard key={project.title} className={cn("reveal p-0", index === 0 && "lg:col-span-2")}>
@@ -431,7 +431,7 @@ function Projects({ data }: { data: PortfolioData }) {
 
 function ResearchAndAchievements({ data }: { data: PortfolioData }) {
   return (
-    <Section id="research" eyebrow="Research & Proof" title="Publication, awards, certifications, and leadership signal.">
+    <Section id="research" eyebrow="Research & Proof" title="Research, Awards & Certifications — Kiran Gautham">
       <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
         <TiltCard className="reveal p-6">
           <IconGlyph name={data.publication.icon} className="h-9 w-9 text-[var(--primary)]" />
@@ -492,7 +492,7 @@ function ResearchAndAchievements({ data }: { data: PortfolioData }) {
 
 function TechStack({ data }: { data: PortfolioData }) {
   return (
-    <Section id="tech-stack" eyebrow="Tech Stack" title="A broad toolkit, composed for speed and maintainability.">
+    <Section id="tech-stack" eyebrow="Tech Stack" title="Full Tech Stack — Languages, Frameworks, Databases & Tools">
       <div className="reveal flex flex-wrap gap-3">
         {data.techStack.map((tech, index) => (
           <motion.span
@@ -520,7 +520,7 @@ function GithubActivity({ data }: { data: PortfolioData }) {
   ];
 
   return (
-    <Section id="github" eyebrow="GitHub Activity" title="A coding signal board for experiments, systems, and shipping.">
+    <Section id="github" eyebrow="GitHub Activity" title="GitHub Activity — Open Source Contributions by Kiran Gautham">
       <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="reveal glass rounded-[var(--radius)] p-5">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
@@ -594,7 +594,7 @@ function Contact({ data }: { data: PortfolioData }) {
   };
 
   return (
-    <Section id="contact" eyebrow="Contact" title="Bring Kiran into the room where ambitious systems are built.">
+    <Section id="contact" eyebrow="Contact" title="Contact Kiran Gautham — Software Engineer, Open to Opportunities">
       <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="reveal glass rounded-[var(--radius)] p-6">
           <h3 className="text-2xl font-semibold">Let’s build something sharp.</h3>

@@ -10,7 +10,7 @@ export const portfolioData = {
     linkedin: "https://www.linkedin.com/in/kiran-gautham-b16319358/",
     resume: "/Kiran-Gautham-Resume.pdf",
     summary:
-      "Computer Science graduate building production-grade web platforms, real-time systems, AI-integrated tools, and cybersecurity-focused applications across React, Node.js, Python, FastAPI, databases, and interactive visualization.",
+      "Kiran Gautham is a Software Engineer at Sustains.ai building production-grade full-stack platforms, AI/ML systems, and cybersecurity tools using React, Next.js, Node.js, Python, and FastAPI.",
   },
   heroStats: [
     { value: "8.18", label: "CSE CGPA" },

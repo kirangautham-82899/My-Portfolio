@@ -82,55 +82,96 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Kiran Gautham",
-  url: "https://my-portfolio-alpha-ochre-20.vercel.app",
-  image: "https://my-portfolio-alpha-ochre-20.vercel.app/og-image.png",
-  jobTitle: "Software Engineer",
-  worksFor: {
-    "@type": "Organization",
-    name: "Sustains.ai Financial Solutions LLP",
-  },
-  alumniOf: [
-    {
-      "@type": "CollegeOrUniversity",
-      name: "Ahalia School of Engineering and Technology",
-      address: "Palakkad, Kerala, India",
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${SITE_URL}/#person`,
+    name: "Kiran Gautham",
+    givenName: "Kiran",
+    familyName: "Gautham",
+    url: SITE_URL,
+    image: `${SITE_URL}/og-image.png`,
+    jobTitle: "Software Engineer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Sustains.ai Financial Solutions LLP",
+      url: "https://sustains.ai",
     },
-    {
-      "@type": "CollegeOrUniversity",
-      name: "Amrita Vishwa Vidyapeetham",
-      address: "Coimbatore, Tamil Nadu, India",
+    alumniOf: [
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Ahalia School of Engineering and Technology",
+        address: "Palakkad, Kerala, India",
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        name: "Amrita Vishwa Vidyapeetham",
+        address: "Coimbatore, Tamil Nadu, India",
+      },
+    ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Palakkad",
+      addressRegion: "Kerala",
+      addressCountry: "IN",
     },
-  ],
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Palakkad",
-    addressRegion: "Kerala",
-    addressCountry: "IN",
+    email: "kirangautham82899@gmail.com",
+    sameAs: [
+      "https://github.com/kirangautham-82899",
+      "https://www.linkedin.com/in/kiran-gautham-b16319358/",
+      SITE_URL,
+    ],
+    knowsAbout: [
+      "Full Stack Development",
+      "React.js",
+      "Next.js",
+      "Node.js",
+      "Python",
+      "TypeScript",
+      "AI/ML",
+      "Cybersecurity",
+      "Real-Time Systems",
+      "FastAPI",
+      "WebSockets",
+      "PostgreSQL",
+      "MongoDB",
+    ],
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "Software Engineer",
+      occupationLocation: {
+        "@type": "City",
+        name: "Bangalore",
+      },
+      skills: "React, Next.js, Node.js, Python, TypeScript, FastAPI, AI/ML, Cybersecurity",
+    },
+    description:
+      "Kiran Gautham is a Software Engineer at Sustains.ai. Full-stack developer specialising in React, Next.js, Node.js, Python, AI/ML, and cybersecurity. Published researcher, 15+ hackathon wins, B.Tech CSE 2026.",
   },
-  email: "kirangautham82899@gmail.com",
-  sameAs: [
-    "https://github.com/kirangautham-82899",
-    "https://www.linkedin.com/in/kiran-gautham-b16319358/",
-  ],
-  knowsAbout: [
-    "Full Stack Development",
-    "React.js",
-    "Next.js",
-    "Node.js",
-    "Python",
-    "TypeScript",
-    "AI/ML",
-    "Cybersecurity",
-    "Real-Time Systems",
-    "FastAPI",
-  ],
-  description:
-    "Software Engineer at Sustains.ai. Full-stack developer specialising in React, Next.js, Node.js, Python, AI/ML, and cybersecurity. B.Tech CSE graduate, published researcher, 15+ hackathon wins.",
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    url: SITE_URL,
+    name: "Kiran Gautham — Portfolio",
+    description: "Personal portfolio of Kiran Gautham, Software Engineer specialising in full-stack, AI/ML, and cybersecurity.",
+    author: { "@id": `${SITE_URL}/#person` },
+    inLanguage: "en-IN",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}/#profilepage`,
+    url: SITE_URL,
+    name: "Kiran Gautham | Software Engineer Portfolio",
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#person` },
+    mainEntity: { "@id": `${SITE_URL}/#person` },
+    dateModified: "2026-09-26",
+    inLanguage: "en-IN",
+  },
+];
 
 export default function RootLayout({
   children,
