@@ -171,6 +171,7 @@ export const portfolioData = {
     { icon: "Binary", title: "Second Prize", text: "CODEATHON, Ahalia SEaT" },
     { icon: "BadgeCheck", title: "Best Project Award", text: "Department of Computer Science" },
     { icon: "Radar", title: "Adobe India Hackathon", text: "Competitive hackathon recognition" },
+    { icon: "BotMessageSquare", title: "Orchestrate Excellence — 451st Place", text: "HackerRank Orchestrate May 2026 · Built and submitted an AI Agent — Certificate of Excellence" },
   ],
   certifications: [
     { icon: "Code2",       title: "React",                        issuer: "HackerRank",        text: "Certified in building component-based UIs with React.js" },
