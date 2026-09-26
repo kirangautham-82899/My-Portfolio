@@ -91,7 +91,12 @@ const jsonLd = [
     givenName: "Kiran",
     familyName: "Gautham",
     url: SITE_URL,
-    image: `${SITE_URL}/og-image.png`,
+    image: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/og-image.png`,
+      width: 1200,
+      height: 630,
+    },
     jobTitle: "Software Engineer",
     worksFor: {
       "@type": "Organization",
