@@ -178,6 +178,8 @@ export const portfolioData = {
     "Web Development - NSDC, Internshala",
     "Python - NSDC, Internshala",
     "Software Testing - NPTEL",
+    "Orchestrate Excellence - HackerRank",
+    "Front-End Developer Capstone - Meta (Coursera)",
   ],
   leadership: [
     {
