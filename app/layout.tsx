@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | Kiran Gautham",
   },
   description:
-    "Kiran Gautham — Software Engineer at Sustains.ai. Full-stack developer specialising in React, Next.js, Node.js, Python, AI/ML, and cybersecurity. B.Tech CSE graduate, published researcher, 15+ hackathon wins.",
+    "Kiran Gautham — Software Engineer at Sustains.ai. Full-stack developer in React, Next.js, Node.js, Python, AI/ML & cybersecurity. 15+ hackathon wins.",
   keywords: [
     "Kiran Gautham",
     "Kiran Gautham portfolio",
