@@ -173,7 +173,7 @@ const jsonLd = [
     isPartOf: { "@id": `${SITE_URL}/#website` },
     about: { "@id": `${SITE_URL}/#person` },
     mainEntity: { "@id": `${SITE_URL}/#person` },
-    dateModified: "2026-09-26",
+    dateModified: "2026-09-27T00:00:00+05:30",
     inLanguage: "en-IN",
   },
 ];
